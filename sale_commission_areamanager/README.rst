@@ -12,6 +12,8 @@ you to compute settlement to the Area Manager agent
 Usage
 =====
 
+For an agent, you can configure an area manager, with their own commission. For every area manager, different commissions can be applied, depending on the sub agent who is doing sale order.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/165/10.0"
@@ -35,7 +37,9 @@ Images
 
 Contributors
 ------------
+
 * Nicola Malcontenti <nicola.malcontenti@agilebg.com>
+* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 
 Icon
 ----
