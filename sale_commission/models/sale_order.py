@@ -17,6 +17,29 @@ class SaleOrder(models.Model):
         string="Commissions", compute="_compute_commission_total",
         store=True)
 
+    @api.multi
+    @api.onchange('partner_id')
+    def onchange_partner_id(self):
+        self.ensure_one()
+        res = super(SaleOrder, self).onchange_partner_id()
+        # workaround for https://github.com/odoo/odoo/issues/17618
+        for order_line in self.order_line:
+            order_line.agents = None
+        return res
+
+    @api.multi
+    def recompute_lines_agents(self):
+        for order in self:
+            for line in order.order_line:
+                line.agents.unlink()
+                for agent in self.partner_id.agents:
+                    line.agents.create({
+                        'sale_line': line.id,
+                        'agent': agent.id,
+                        'commission': agent.commission.id,
+                    })
+
+
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"

@@ -27,6 +27,9 @@
                        widget="monetary"
                        options="{'currency_field': 'currency_id'}"/>
             </field>
+            <xpath expr="//field[@name='order_line']" position="after">
+                <button name="recompute_lines_agents" type="object" string="Recompute lines agents"></button>
+            </xpath>
         </field>
     </record>
 
